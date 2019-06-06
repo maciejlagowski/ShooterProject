@@ -3,12 +3,15 @@ package io.github.maciejlagowski.jtp.shooter.enemies;
 import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
 import io.github.maciejlagowski.jtp.shooter.logic.Logic;
 import javafx.animation.PathTransition;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import java.util.Random;
 
 import static io.github.maciejlagowski.jtp.shooter.enemies.DifficultyEnum.*;
+import static java.lang.Thread.sleep;
 
 public class Enemy extends ImageView {
 
@@ -40,15 +43,20 @@ public class Enemy extends ImageView {
     }
 
     public void kill() {
-        setVisible(false);
         Logic.incrementScore();
         EnemyList.getEnemyList().remove(this);
+        setImage(new Image("/img/ufoDead.gif"));
+        PathTransition transition = new PathTransition();
+        transition.setDuration(new Duration(1000));
+        transition.setNode(this);
+        transition.setPath(new Line(position[0], position[1], position[0], windowSize[1] + 60));
+        transition.play();
     }
 
     public void attack() {
         Random random = new Random();
         if(random.nextInt(difficultyLevel.getDifficulty()) == 0) {
-            //TODO attack animation
+            setImage(new Image("/img/ufoAttack.gif"));
             LivesList.decrementLives();
         }
     }

@@ -5,6 +5,7 @@ import io.github.maciejlagowski.jtp.shooter.enemies.Enemy;
 import io.github.maciejlagowski.jtp.shooter.enemies.EnemyList;
 import io.github.maciejlagowski.jtp.shooter.lives.Live;
 import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Logic {
             if (time > 100) {
                 time = 0;
                 enemyList.forEach(enemy -> {
+                    enemy.setImage(new Image("/img/ufo.png"));
                     enemy.attack();
                     enemy.moveRandom();
                 });
@@ -29,11 +31,6 @@ public class Logic {
             if (enemyList.isEmpty()) {
                 level++;
                 Content.setTextOnLevelLabel("level " + level);
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
                 EnemyList.generateEnemies(level * 3, root);
                 enemyList.forEach(Enemy::moveRandom);
                 LivesList.renewLives();
