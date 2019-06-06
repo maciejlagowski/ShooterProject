@@ -1,18 +1,21 @@
 package io.github.maciejlagowski.jtp.shooter;
 
-import io.github.maciejlagowski.jtp.shooter.logic.Timer;
+import io.github.maciejlagowski.jtp.shooter.content.Content;
 import javafx.application.Application;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Timer timer = new Timer();
-
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Maciej Lagowski Rail-Shooter");
-        primaryStage.setScene(new Scene(timer.createContent()));
+        primaryStage.setTitle("Maciej Łagowski JTP Project - Shooter");
+        Scene scene = new Scene(new Content().createContent());
+        scene.setCursor(Cursor.CROSSHAIR);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

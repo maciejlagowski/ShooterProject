@@ -1,23 +1,26 @@
 package io.github.maciejlagowski.jtp.shooter.enemies;
 
+import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
+import io.github.maciejlagowski.jtp.shooter.logic.Logic;
 import javafx.animation.PathTransition;
-import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-
 import java.util.Random;
 
-public class Enemy extends Rectangle {
+import static io.github.maciejlagowski.jtp.shooter.enemies.DifficultyEnum.*;
+
+public class Enemy extends ImageView {
 
     private final static int recSize = 40;
     private final int[] windowSize;
-    private final int duration = 1;
-    private final int maxJumpLength = 200;
+    private final int duration = 1; //speed^-1
+    private final int maxJumpLength = 500;
+    private final DifficultyEnum difficultyLevel = EASY;
     private double[] position = new double[2];
 
-    public Enemy(int[] windowSize) {
-        super(recSize, recSize, Color.BLUE);
+    Enemy(int[] windowSize) {
+        super("/img/ufo.png");
         this.windowSize = windowSize;
         Random rand = new Random();
         this.position[0] = rand.nextInt(windowSize[0]) + 1;
@@ -38,7 +41,16 @@ public class Enemy extends Rectangle {
 
     public void kill() {
         setVisible(false);
+        Logic.incrementScore();
         EnemyList.getEnemyList().remove(this);
+    }
+
+    public void attack() {
+        Random random = new Random();
+        if(random.nextInt(difficultyLevel.getDifficulty()) == 0) {
+            //TODO attack animation
+            LivesList.decrementLives();
+        }
     }
 
     private void randNewPosition() {
