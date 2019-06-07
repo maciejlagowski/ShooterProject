@@ -1,7 +1,6 @@
 package io.github.maciejlagowski.jtp.shooter.menu;
 
 import io.github.maciejlagowski.jtp.shooter.content.Content;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -10,20 +9,19 @@ import javafx.stage.Stage;
 
 public class MenuController {
 
-    private Stage primaryStage;
-
     @FXML
     protected void handleNewGameAction(ActionEvent event) {
-        Platform.runLater( () -> {
-            primaryStage.setTitle("Maciej Łagowski JTP Project - Shooter");
-            Scene scene = new Scene(new Content().createContent());
-            scene.setCursor(Cursor.CROSSHAIR);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        });
-    }
-
-    void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        StageControllerClass stageControllerClass = Menu.getStageControllerClass();
+        Stage actualStage = stageControllerClass.getActualStage();
+        actualStage.close();
+        actualStage = new Stage();
+        stageControllerClass.setActualStage(actualStage);
+        stageControllerClass.setActualController(null);
+        actualStage.setTitle("Maciej Łagowski JTP Project - Shooter");
+        Scene scene = new Scene(new Content().createContent());
+        scene.setCursor(Cursor.CROSSHAIR);
+        actualStage.setScene(scene);
+        actualStage.show();
     }
 }
+//TODO handlersy do reszty przyciskow

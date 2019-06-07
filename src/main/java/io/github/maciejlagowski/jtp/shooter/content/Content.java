@@ -1,15 +1,9 @@
 package io.github.maciejlagowski.jtp.shooter.content;
 
 import io.github.maciejlagowski.jtp.shooter.config.ConfigReader;
-import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
+import io.github.maciejlagowski.jtp.shooter.handlers.BackToMenuHandler;
 import io.github.maciejlagowski.jtp.shooter.logic.Logic;
-import io.github.maciejlagowski.jtp.shooter.menu.MenuController;
-import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -17,38 +11,29 @@ import javafx.scene.layout.Pane;
 public class Content {
 
     private final int[] windowSize = ConfigReader.getWindowSize();
-    private static Label levelLabel = new Label();
-    private static Label diedLabel = new Label();
-    private static Label scoreLabel = new Label();
-    private static Button backToMenuButton = new Button();
-    private Pane root = new Pane();
-    private Logic logic = new Logic();
+    private final Label levelLabel = new Label();
+    private final Label diedLabel = new Label();
+    private final Label scoreLabel = new Label();
+    private final Button backToMenuButton = new Button();
+    private final Pane root = new Pane();
 
     public Parent createContent() {
         root.setPrefSize(windowSize[0], windowSize[1]);
         createLabels();
         createButton();
-        LivesList.initLivesList(root);
-//        LivesList.getLivesList().forEach(live -> {});
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                logic.update(root);
-            }
-        };
-        timer.start();
+        new Logic(root, this);
         return root;
     }
 
-    public static void setTextOnLevelLabel(String text) {
+    public void setTextOnLevelLabel(String text) {
         levelLabel.setText(text);
     }
 
-    public static void setDiedLabelVisible() {
+    public void setDiedLabelVisible() {
         diedLabel.setVisible(true);
     }
 
-    public static void setScoreLabel(int score) {
+    public void setScoreLabel(int score) {
         scoreLabel.setText("Your score: " + score);
         scoreLabel.setVisible(true);
         backToMenuButton.setVisible(true);
@@ -78,18 +63,7 @@ public class Content {
         backToMenuButton.setLayoutX(windowSize[0] / 2 - 60);
         backToMenuButton.setLayoutY(windowSize[1] / 2 + 80);
         backToMenuButton.setVisible(false);
-        backToMenuButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-//                FXMLLoader fxmlLoader = new FXMLLoader();
-//                Parent root = fxmlLoader.load(getClass().getResource("/menu.fxml").openStream());
-//                MenuController menuController = fxmlLoader.getController();
-//                menuController.setPrimaryStage(primaryStage);
-//                primaryStage.setTitle("Maciej Łagowski JTP Project - Shooter");
-//                primaryStage.setScene(new Scene(root));
-//                primaryStage.setResizable(false);
-//                primaryStage.show();
-            }
-        });
+        backToMenuButton.setOnAction(new BackToMenuHandler());
         root.getChildren().add(backToMenuButton);
     }
 }

@@ -1,48 +1,56 @@
 package io.github.maciejlagowski.jtp.shooter.logic;
 
 import io.github.maciejlagowski.jtp.shooter.content.Content;
-import io.github.maciejlagowski.jtp.shooter.enemies.Enemy;
 import io.github.maciejlagowski.jtp.shooter.enemies.EnemyList;
-import io.github.maciejlagowski.jtp.shooter.lives.Live;
 import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
-import javafx.scene.image.Image;
+import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
-import java.util.List;
 
 public class Logic {
 
-    private static int score = 0;
+    private EnemyList enemyList;
+    private Content content;
+    private LivesList livesList;
+    private int score = 0;
     private int time = 0;
     private int level = 0;
-    private List<Enemy> enemyList = EnemyList.getEnemyList();
 
-    public void update(Pane root) {
-        if(LivesList.getQuantity() > 0) {
-
-            time++;
-            if (time > 100) {
-                time = 0;
-                enemyList.forEach(enemy -> {
-                    enemy.setImage(new Image("/img/ufo.png"));
-                    enemy.attack();
-                    enemy.moveRandom();
-                });
+    public Logic(Pane root, Content content) {
+        this.content = content;
+        this.livesList = new LivesList(root);
+        this.enemyList = new EnemyList(root, this);
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                update();
             }
-            if (enemyList.isEmpty()) {
-                level++;
-                Content.setTextOnLevelLabel("level " + level);
-                EnemyList.generateEnemies(level * 3, root);
-                enemyList.forEach(Enemy::moveRandom);
-                LivesList.renewLives();
-            }
-        }
+        };
+        timer.start();
     }
 
-    public static void incrementScore() {
+    public void incrementScore() {
         score++;
     }
 
-    public static int getScore() {
-        return score;
+    private void update() {
+        if (!livesList.isEmpty()) {
+            time++;
+            if (time > 100) {
+                time = 0;
+                enemyList.moveEveryone();
+                livesList.decrementLives(enemyList.attackEveryone());
+            }
+            if (enemyList.isEmpty()) {
+                level++;
+                content.setTextOnLevelLabel("level " + level);
+                enemyList.generateEnemies(level * 3);
+                enemyList.moveEveryone();
+                livesList.renewLives();
+            }
+        } else {
+            content.setDiedLabelVisible();
+            content.setScoreLabel(score);
+            enemyList.hideEveryone();
+        }
     }
 }
