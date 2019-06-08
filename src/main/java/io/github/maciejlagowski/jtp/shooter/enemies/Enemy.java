@@ -7,13 +7,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
+
 import java.util.Random;
 
 public class Enemy extends ImageView {
 
     private final int[] windowSize;
     private final int maxJumpLength = ConfigReader.getMaxJumpLength();
-    private final DifficultyEnum difficultyLevel = ConfigReader.getDifficultyLevel();
+    private final Difficulty difficultyLevel = ConfigReader.getDifficultyLevel();
     private double[] position = new double[2];
     private Logic logic;
     private EnemyList enemyList;

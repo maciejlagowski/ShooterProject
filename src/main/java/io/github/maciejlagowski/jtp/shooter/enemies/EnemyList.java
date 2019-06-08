@@ -1,10 +1,11 @@
 package io.github.maciejlagowski.jtp.shooter.enemies;
 
 import io.github.maciejlagowski.jtp.shooter.config.ConfigReader;
-import io.github.maciejlagowski.jtp.shooter.handlers.MouseClickHandler;
+import io.github.maciejlagowski.jtp.shooter.handlers.EnemyClickHandler;
 import io.github.maciejlagowski.jtp.shooter.logic.Logic;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class EnemyList {
         for (int i = 0; i < quantity; i++) {
             enemyList.add(new Enemy(ConfigReader.getWindowSize(), logic, this));
         }
-        MouseClickHandler mouseClickHandler = new MouseClickHandler();
+        EnemyClickHandler enemyClickHandler = new EnemyClickHandler();
         for (Enemy enemy : enemyList) {
-            enemy.setOnMouseClicked(mouseClickHandler);
+            enemy.setOnMouseClicked(enemyClickHandler);
             root.getChildren().add(enemy);
         }
     }

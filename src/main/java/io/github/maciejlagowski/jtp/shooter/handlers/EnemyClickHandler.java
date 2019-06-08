@@ -4,7 +4,7 @@ import io.github.maciejlagowski.jtp.shooter.enemies.Enemy;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
-public class MouseClickHandler implements EventHandler {
+public class EnemyClickHandler implements EventHandler {
 
     @Override
     public void handle(final Event event) {

@@ -1,5 +1,6 @@
-package io.github.maciejlagowski.jtp.shooter.menu;
+package io.github.maciejlagowski.jtp.shooter.handlers;
 
+import io.github.maciejlagowski.jtp.shooter.menu.MenuController;
 import javafx.stage.Stage;
 import lombok.Data;
 

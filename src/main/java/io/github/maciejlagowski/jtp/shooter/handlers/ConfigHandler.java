@@ -1,7 +1,6 @@
 package io.github.maciejlagowski.jtp.shooter.handlers;
 
 import io.github.maciejlagowski.jtp.shooter.menu.Menu;
-import io.github.maciejlagowski.jtp.shooter.menu.MenuController;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BackToMenuHandler implements EventHandler {
-
+public class ConfigHandler implements EventHandler {
     @Override
     public void handle(final Event event) {
         StageControllerClass stageControllerClass = Menu.getStageControllerClass();
@@ -22,14 +20,12 @@ public class BackToMenuHandler implements EventHandler {
         stageControllerClass.setActualStage(actualStage);
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
-            Parent root = fxmlLoader.load(getClass().getResource("/menu.fxml").openStream());
-            MenuController controller = (MenuController) fxmlLoader.getController();
+            Parent root = fxmlLoader.load(getClass().getResource("/fxml/config.fxml").openStream());
             actualStage.setTitle("Maciej Łagowski JTP Project - Shooter");
-            stageControllerClass.setActualController(controller);
             actualStage.setScene(new Scene(root));
             actualStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("FXML config not found");
         }
     }
 }
