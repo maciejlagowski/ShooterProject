@@ -13,7 +13,7 @@ import java.util.Random;
 public class Enemy extends ImageView {
 
     private final int[] windowSize;
-    private final int maxJumpLength = ConfigReader.getMaxJumpLength();
+    private final int maxJumpLength = 500;
     private final Difficulty difficultyLevel = ConfigReader.getDifficultyLevel();
     private double[] position = new double[2];
     private Logic logic;

@@ -1,5 +1,6 @@
 package io.github.maciejlagowski.jtp.shooter.logic;
 
+import io.github.maciejlagowski.jtp.shooter.config.ConfigReader;
 import io.github.maciejlagowski.jtp.shooter.content.Content;
 import io.github.maciejlagowski.jtp.shooter.enemies.EnemyList;
 import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
@@ -12,12 +13,15 @@ public class Logic {
     private EnemyList enemyList;
     private Content content;
     private LivesList livesList;
-    AnimationTimer timer;
+    private final String name;
     private int time = 0;
     private int level = 0;
     private Integer score = 0;
+    private final int timerSpeed = ConfigReader.getTimerSpeed();
+    private AnimationTimer timer;
 
-    public Logic(Pane root, Content content) {
+    public Logic(Pane root, Content content, String name) {
+        this.name = name;
         this.content = content;
         this.livesList = new LivesList(root);
         this.enemyList = new EnemyList(root, this);
@@ -37,7 +41,7 @@ public class Logic {
     private void update() {
         if (!livesList.isEmpty()) {
             time++;
-            if (time > 100) {
+            if (time > timerSpeed) {
                 time = 0;
                 enemyList.moveEveryone();
                 livesList.decrementLives(enemyList.attackEveryone());
@@ -52,10 +56,9 @@ public class Logic {
         } else {
             timer.stop();
             content.setDiedLabelVisible();
-            content.setScoreLabel(score);
-            //TODO name of player
-            new Scores().addScore("name", score.toString());
+            content.setEnding(score);
             enemyList.hideEveryone();
+            new Scores().addScore(name, score.toString());
         }
     }
 }

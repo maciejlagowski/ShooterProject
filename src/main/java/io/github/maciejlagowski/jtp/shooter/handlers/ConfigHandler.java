@@ -1,5 +1,6 @@
 package io.github.maciejlagowski.jtp.shooter.handlers;
 
+import io.github.maciejlagowski.jtp.shooter.config.ConfigController;
 import io.github.maciejlagowski.jtp.shooter.menu.Menu;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -21,6 +22,9 @@ public class ConfigHandler implements EventHandler {
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
             Parent root = fxmlLoader.load(getClass().getResource("/fxml/config.fxml").openStream());
+            ConfigController controller = (ConfigController) fxmlLoader.getController();
+            stageControllerClass.setActualController(null);
+            controller.init();
             actualStage.setTitle("Maciej Łagowski JTP Project - Shooter");
             actualStage.setScene(new Scene(root));
             actualStage.show();

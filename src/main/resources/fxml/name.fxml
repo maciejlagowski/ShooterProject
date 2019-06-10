@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="170.0" prefWidth="257.0"
+            xmlns="http://javafx.com/javafx/8.0.999-ea"
+            fx:controller="io.github.maciejlagowski.jtp.shooter.content.NameController">
+    <children>
+        <Button layoutX="189.0" layoutY="111.0" mnemonicParsing="false" text="OK" onAction="#handleOKButton"/>
+        <TextField fx:id="nameTextField" layoutX="32.0" layoutY="75.0" prefHeight="26.0" prefWidth="194.0"
+                   promptText="name"/>
+        <Label layoutX="32.0" layoutY="14.0" text="Enter your name">
+            <font>
+                <Font size="23.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

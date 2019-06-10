@@ -8,9 +8,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -19,11 +17,7 @@ public class Scores {
     private String[][] scoresTab = new String[2][6];
 
     public Scores() {
-        try {
-            load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        load();
     }
 
     public void show(GridPane gridPane) {
@@ -33,14 +27,23 @@ public class Scores {
         }
     }
 
-    private void load() throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/csv/scores.csv"));
-        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
-        int i = 0;
-        for (CSVRecord csvRecord : csvParser) {
-            scoresTab[0][i] = csvRecord.get(0);
-            scoresTab[1][i] = csvRecord.get(1);
-            i++;
+    private void load() {
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get("src/main/resources/csv/scores.csv"));
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+            int i = 0;
+            for (CSVRecord csvRecord : csvParser) {
+                scoresTab[0][i] = csvRecord.get(0);
+                scoresTab[1][i] = csvRecord.get(1);
+                i++;
+            }
+        } catch (IOException e) {
+            System.err.println("No scores file");
+            for (int i = 0; i < 5; i++) {
+                scoresTab[0][i] = "";
+                scoresTab[1][i] = "0";
+            }
+
         }
     }
 
@@ -48,20 +51,20 @@ public class Scores {
         scoresTab[0][5] = name;
         scoresTab[1][5] = score;
         sort();
+        save();
+    }
+
+    private void save() {
         try {
-            save();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("src/main/resources/csv/scores.csv")));
+            for (int i = 0; i < 5; i++) {
+                writer.write(scoresTab[0][i] + "," + scoresTab[1][i]);
+                writer.newLine();
+            }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void save() throws IOException {
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/main/resources/csv/scores.csv"));
-        for (int i = 0; i < 5; i++) {
-            writer.write(scoresTab[0][i] + "," + scoresTab[1][i]);
-            writer.newLine();
-        }
-        writer.close();
     }
 
     private void sort() {
@@ -89,11 +92,7 @@ public class Scores {
             scoresTab[0][i] = "";
             scoresTab[1][i] = "0";
         }
-        try {
-            save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        save();
         new ScoresHandler().handle(new ActionEvent());
     }
 }

@@ -17,11 +17,11 @@ public class Content {
     private final Button backToMenuButton = new Button();
     private final Pane root = new Pane();
 
-    public Parent createContent() {
+    Parent createContent(String name) {
         root.setPrefSize(windowSize[0], windowSize[1]);
         createLabels();
         createButton();
-        new Logic(root, this);
+        new Logic(root, this, name);
         return root;
     }
 
@@ -33,7 +33,7 @@ public class Content {
         diedLabel.setVisible(true);
     }
 
-    public void setScoreLabel(int score) {
+    public void setEnding(Integer score) {
         scoreLabel.setText("Your score: " + score);
         scoreLabel.setVisible(true);
         backToMenuButton.setVisible(true);
@@ -44,9 +44,9 @@ public class Content {
         levelLabel.setLayoutY(windowSize[1] - 23);
         root.getChildren().add(levelLabel);
 
-        diedLabel.setStyle("-fx-font-size: 120px; -fx-text-fill: #A70000; -fx-font-family: serif");
+        diedLabel.setStyle("-fx-font-size: 118px; -fx-text-fill: #A70000; -fx-font-family: serif");
         diedLabel.setText("YOU DIED.");
-        diedLabel.setLayoutX(windowSize[0] / 2 - 300);
+        diedLabel.setLayoutX(windowSize[0] / 2 - 310);
         diedLabel.setLayoutY(windowSize[1] / 2 - 100);
         diedLabel.setVisible(false);
         root.getChildren().add(diedLabel);
@@ -60,7 +60,7 @@ public class Content {
 
     private void createButton() {
         backToMenuButton.setText("Back to menu");
-        backToMenuButton.setLayoutX(windowSize[0] / 2 - 60);
+        backToMenuButton.setLayoutX(windowSize[0] / 2 + 60);
         backToMenuButton.setLayoutY(windowSize[1] / 2 + 80);
         backToMenuButton.setVisible(false);
         backToMenuButton.setOnAction(new BackToMenuHandler());
