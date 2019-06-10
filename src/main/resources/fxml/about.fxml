@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="369.0" prefWidth="447.0"
+            xmlns="http://javafx.com/javafx/8.0.999-ea"
+            fx:controller="io.github.maciejlagowski.jtp.shooter.about.AboutController">
+    <Label layoutX="14.0" layoutY="14.0" text="About Independence Day - Minigame">
+        <font>
+            <Font size="19.0"/>
+        </font>
+    </Label>
+    <Button layoutX="331.0" layoutY="318.0" mnemonicParsing="false" onAction="#OkButton" prefHeight="26.0"
+            prefWidth="72.0" text="OK"/>
+    <Label layoutX="14.0" layoutY="61.0"
+           text="Game rules:&#10;UFO attacked New York, and you have to defend it.&#10;Destroy them by clicking mouse. Aliens are attacking &#10;too, so you must be quick. They cannot hit you &#10;9 times in one level or you die."/>
+    <Label layoutX="14.0" layoutY="209.0"
+           text="This game was created for an university project.&#10;Game is running on JavaFX, with 1.8 SDK."/>
+    <Label layoutX="14.0" layoutY="259.0"
+           text="Author:&#10;Maciej Łagowski, Student of Military University of Technology.&#10;Warsaw, 2019"/>
+    <Hyperlink layoutX="14.0" layoutY="307.0" text="maciejlagowski.github.io" underline="true"/>
+    <Hyperlink accessibleRoleDescription="mailto:m_lagowski@o2.pl" layoutX="14.0" layoutY="331.0"
+               text="m_lagowski@o2.pl" underline="true"/>
+</AnchorPane>

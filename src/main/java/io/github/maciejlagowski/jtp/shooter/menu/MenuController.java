@@ -1,9 +1,6 @@
 package io.github.maciejlagowski.jtp.shooter.menu;
 
-import io.github.maciejlagowski.jtp.shooter.handlers.ConfigHandler;
-import io.github.maciejlagowski.jtp.shooter.handlers.NewGameHandler;
-import io.github.maciejlagowski.jtp.shooter.handlers.ScoresHandler;
-import io.github.maciejlagowski.jtp.shooter.handlers.StageControllerClass;
+import io.github.maciejlagowski.jtp.shooter.handlers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -22,6 +19,11 @@ public class MenuController {
     @FXML
     protected void handleScoresAction(ActionEvent event) {
         new ScoresHandler().handle(event);
+    }
+
+    @FXML
+    protected void handleAboutAction(ActionEvent event) {
+        new AboutHandler().handle(event);
     }
 
     @FXML

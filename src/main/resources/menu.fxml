@@ -5,24 +5,31 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="288.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.maciejlagowski.jtp.shooter.menu.MenuController">
-   <children>
-      <Button layoutX="188.0" layoutY="76.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="New Game" onAction="#handleNewGameAction"/>
-       <Button layoutX="188.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0"
-               text="High Scores" onAction="#handleScoresAction"/>
-       <Button layoutX="188.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0"
-               text="Options" onAction="#handleConfigAction"/>
-       <Button layoutX="188.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Exit"
-               onAction="#handleExitAction"/>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
-         <image>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="288.0" prefWidth="357.0"
+            xmlns="http://javafx.com/javafx/8.0.999-ea"
+            fx:controller="io.github.maciejlagowski.jtp.shooter.menu.MenuController">
+   <Button layoutX="214.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleNewGameAction" prefHeight="25.0"
+           prefWidth="119.0" text="New Game"/>
+   <Button layoutX="214.0" layoutY="125.0" mnemonicParsing="false" onAction="#handleScoresAction" prefHeight="25.0"
+           prefWidth="119.0" text="High Scores"/>
+   <Button layoutX="214.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleConfigAction" prefHeight="25.0"
+           prefWidth="119.0" text="Options"/>
+   <Button layoutX="214.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleExitAction" prefHeight="25.0"
+           prefWidth="119.0" text="Exit"/>
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="99.0" pickOnBounds="true"
+              preserveRatio="true">
             <Image url="img/ufo.png" />
-         </image>
       </ImageView>
-      <Label layoutX="26.0" layoutY="14.0" text="Ufo-Shooter Game">
+   <Label layoutX="26.0" layoutY="14.0" prefHeight="45.0" prefWidth="326.0" text="Independence Day">
          <font>
             <Font size="34.0" />
          </font>
       </Label>
-   </children>
+   <Label layoutX="26.0" layoutY="59.0" prefHeight="26.0" prefWidth="122.0" text="Minigame">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Label>
+   <Button layoutX="214.0" layoutY="198.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="About"
+           onAction="#handleAboutAction"/>
 </AnchorPane>

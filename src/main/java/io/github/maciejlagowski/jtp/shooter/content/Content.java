@@ -6,7 +6,8 @@ import io.github.maciejlagowski.jtp.shooter.logic.Logic;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 
 public class Content {
 
@@ -19,6 +20,11 @@ public class Content {
 
     Parent createContent(String name) {
         root.setPrefSize(windowSize[0], windowSize[1]);
+        BackgroundImage bgImg = new BackgroundImage(new Image("/img/bg.jpg"),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true));
+        root.setBackground(new Background(bgImg));
         createLabels();
         createButton();
         new Logic(root, this, name);
@@ -63,7 +69,7 @@ public class Content {
         backToMenuButton.setLayoutX(windowSize[0] / 2 + 60);
         backToMenuButton.setLayoutY(windowSize[1] / 2 + 80);
         backToMenuButton.setVisible(false);
-        backToMenuButton.setOnAction(new BackToMenuHandler());
+        backToMenuButton.setOnAction((event) -> new BackToMenuHandler().handle(event));
         root.getChildren().add(backToMenuButton);
     }
 }
