@@ -1,12 +1,14 @@
 package io.github.maciejlagowski.jtp.shooter.menu;
 
 import io.github.maciejlagowski.jtp.shooter.handlers.StageControllerClass;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Menu extends Application {
@@ -14,7 +16,10 @@ public class Menu extends Application {
     private static StageControllerClass stageControllerClass = new StageControllerClass();
 
     public static void main(String[] args) {
+        new File("log.txt").delete();
+        LoggerClass.getLogger().info("Program started");
         launch(args);
+        LoggerClass.getLogger().info("Program ended");
     }
 
     public static StageControllerClass getStageControllerClass() {

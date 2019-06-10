@@ -1,6 +1,7 @@
 package io.github.maciejlagowski.jtp.shooter.scores;
 
 import io.github.maciejlagowski.jtp.shooter.handlers.ScoresHandler;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -38,7 +39,7 @@ public class Scores {
                 i++;
             }
         } catch (IOException e) {
-            System.err.println("No scores file");
+            LoggerClass.getLogger().error("No scores file");
             for (int i = 0; i < 5; i++) {
                 scoresTab[0][i] = "";
                 scoresTab[1][i] = "0";
@@ -63,7 +64,7 @@ public class Scores {
             }
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerClass.getLogger().error(e);
         }
     }
 

@@ -4,9 +4,11 @@ import io.github.maciejlagowski.jtp.shooter.config.ConfigReader;
 import io.github.maciejlagowski.jtp.shooter.content.Content;
 import io.github.maciejlagowski.jtp.shooter.enemies.EnemyList;
 import io.github.maciejlagowski.jtp.shooter.lives.LivesList;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import io.github.maciejlagowski.jtp.shooter.scores.Scores;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
+import org.apache.log4j.Logger;
 
 public class Logic {
 
@@ -19,6 +21,7 @@ public class Logic {
     private Integer score = 0;
     private final int timerSpeed = ConfigReader.getTimerSpeed();
     private AnimationTimer timer;
+    private Logger logger = LoggerClass.getLogger();
 
     public Logic(Pane root, Content content, String name) {
         this.name = name;
@@ -48,12 +51,14 @@ public class Logic {
             }
             if (enemyList.isEmpty()) {
                 level++;
+                logger.info("Killed all, moving to new level: " + level);
                 content.setTextOnLevelLabel("level " + level);
                 enemyList.generateEnemies(level * 3);
                 enemyList.moveEveryone();
                 livesList.renewLives();
             }
         } else {
+            logger.info("Player died. Score: " + score + ", level: " + level);
             timer.stop();
             content.setDiedLabelVisible();
             content.setEnding(score);

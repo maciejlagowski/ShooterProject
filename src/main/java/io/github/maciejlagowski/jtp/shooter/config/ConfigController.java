@@ -1,6 +1,7 @@
 package io.github.maciejlagowski.jtp.shooter.config;
 
 import io.github.maciejlagowski.jtp.shooter.handlers.BackToMenuHandler;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class ConfigController {
             writer.close();
             new BackToMenuHandler().handle(event);
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerClass.getLogger().error("Can't save config.csv");
         }
     }
 

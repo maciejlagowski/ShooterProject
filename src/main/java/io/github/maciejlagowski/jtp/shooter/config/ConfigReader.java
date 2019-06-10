@@ -1,6 +1,7 @@
 package io.github.maciejlagowski.jtp.shooter.config;
 
 import io.github.maciejlagowski.jtp.shooter.enemies.Difficulty;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -42,7 +43,7 @@ public class ConfigReader {
                 configTab[1] = Integer.parseInt(csvRecord.get(1));
             }
         } catch (IOException e) {
-            System.err.println("Cannot read config file, loading defaults");
+            LoggerClass.getLogger().error("Cannot read config file, loading defaults");
         } finally {
             windowSize = windowSizes[configTab[0]];
             difficultyLevel = difficulties[configTab[1]];

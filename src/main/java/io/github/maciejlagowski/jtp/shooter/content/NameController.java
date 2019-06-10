@@ -1,6 +1,7 @@
 package io.github.maciejlagowski.jtp.shooter.content;
 
 import io.github.maciejlagowski.jtp.shooter.handlers.StageControllerClass;
+import io.github.maciejlagowski.jtp.shooter.logger.LoggerClass;
 import io.github.maciejlagowski.jtp.shooter.menu.Menu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,5 +27,6 @@ public class NameController {
         scene.setCursor(Cursor.CROSSHAIR);
         actualStage.setScene(scene);
         actualStage.show();
+        LoggerClass.getLogger().info("Starting game");
     }
 }
